@@ -7,7 +7,7 @@ import retrofit2.http.*;
 
 public interface ApiService {
 
-    @POST("api/add_user/{name}/{birth}")
+    @POST("api/add_user/")
     Call<Message> addUser(@Body User user);
 
     @POST("api/update_user")
@@ -16,16 +16,16 @@ public interface ApiService {
     @DELETE("api/remove_user/{id}")
     Call<Message> removeUser(@Path("id") int id);
 
-    @DELETE("api/remove_users")
+    @DELETE("api/remove_all_users")
     Call<Message> removeAllUsers();
 
     @GET("api/get_all_users")
     Call<Message> getAllUsers();
 
-    @GET("get_user_by_id/{id}")
+    @GET("api/get_user_by_id/{id}")
     Call<Message> getUserById(@Path("id") int id);
 
-    @GET("get_user_by_id/{name}")
+    @GET("api/get_user_by_name/{name}")
     Call<Message> getUserByName(@Path("name") String name);
 
 }
