@@ -28,4 +28,7 @@ public interface ApiService {
     @GET("api/get_user_by_name/{name}")
     Call<Message> getUserByName(@Path("name") String name);
 
+    @GET("get_all_users_by_date_birth/{birth_from}/{birth_to}")
+    Call<Message> getAllUsersByDateBirth(@Path("birth_from") Long sTimeFrom, @Path("birth_to") Long sTimeTo);
+
 }

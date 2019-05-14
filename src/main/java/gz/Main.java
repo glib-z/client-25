@@ -7,6 +7,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Main {
 
@@ -19,7 +21,9 @@ public class Main {
         tGetUserByName("Second");
         tRemoveUser(18);
         tRemoveAllUsers();
-
+        Calendar calendarFrom = new GregorianCalendar(2010, 0, 1);
+        Calendar calendarTo = new GregorianCalendar(2018, 5, 23);
+        tGetAllUsersByDateBirth(calendarFrom.getTimeInMillis(), calendarTo.getTimeInMillis());
     }
 
 
@@ -120,7 +124,6 @@ public class Main {
                 Message message = response.body();
                 System.out.println("tRemoveAllUsers(): " + message);
             }
-
             @Override
             public void onFailure(Call<Message> call, Throwable throwable) {
                 System.out.println("tRemoveAllUsers() -> onFailure: " + throwable);
@@ -130,13 +133,18 @@ public class Main {
 
     //===== ^ CHECKED ^ =====
 
-
-
-
-
-
-
-
-
+    private static void tGetAllUsersByDateBirth(Long tsFrom, Long tsTo) {
+        ApiManager.getApiService().getAllUsersByDateBirth(tsFrom, tsTo).enqueue(new Callback<Message>() {
+            @Override
+            public void onResponse(Call<Message> call, Response<Message> response) {
+                Message message = response.body();
+                System.out.println("tGetAllUsersByDateBirth(): " + message);
+            }
+            @Override
+            public void onFailure(Call<Message> call, Throwable throwable) {
+                System.out.println("tGetAllUsersByDateBirth() -> onFailure: " + throwable);
+            }
+        });
+    }
 
 }
